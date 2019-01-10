@@ -104,4 +104,6 @@ migrations/
 !migrations/__init__.py
 media/
 
+.idea/
+
 
