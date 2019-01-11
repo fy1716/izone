@@ -14,10 +14,8 @@ import os
 import sys
 import platform
 
-# 更换默认的数据库连接
-import pymysql
+from util import common_util
 
-pymysql.install_as_MySQLdb()
 # 导入网站个人信息，非通用信息
 from .base_settings import *
 
@@ -31,18 +29,9 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if MY_DEBUG == 0:
-    DEBUG = False
-elif MY_DEBUG == 1:
-    DEBUG = True
-else:
-    # 非强制开启DEBUG模式：如果运行环境是Windows就开启DEBUG，否则关闭
-    if platform.system() == 'Windows':
-        DEBUG = True
-    else:
-        DEBUG = False
+DEBUG = common_util.debug_mode(MY_DEBUG)
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.tendcode.com']
+ALLOWED_HOSTS = MY_ALLOW_HOST
 
 # Application definition
 
